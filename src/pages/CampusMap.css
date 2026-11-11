@@ -1,0 +1,669 @@
+.campus-map-page {
+  /* Design Tokens from Home.css */
+  --onyx-bg: #07090e;
+  --onyx-surface: rgba(14, 22, 36, 0.65);
+  --onyx-surface-hover: rgba(18, 28, 46, 0.85);
+  --onyx-card: rgba(10, 16, 26, 0.75);
+  --onyx-modal: rgba(7, 9, 14, 0.94);
+
+  --electric-cyan: #38d5e8;
+  --electric-cyan-hover: #22d3ee;
+  --electric-cyan-border: rgba(56, 213, 232, 0.22);
+  --electric-cyan-glow: rgba(56, 213, 232, 0.25);
+
+  --electric-indigo: #6366f1;
+  --electric-indigo-neon: #818cf8;
+  --electric-indigo-border: rgba(99, 102, 241, 0.45);
+  --electric-indigo-glow: rgba(99, 102, 241, 0.35);
+
+  --text-white: #ffffff;
+  --text-sub: #cbd5e1;
+  --text-muted: #94a3b8;
+  --text-dark: #64748b;
+
+  margin: 0;
+  min-height: 100vh;
+  font-family: var(--font-display, "Segoe UI", Arial, sans-serif);
+  background-color: var(--onyx-bg);
+  background-image: 
+    radial-gradient(circle at 50% 0%, rgba(14, 22, 38, 0.6) 0%, rgba(7, 9, 14, 0.95) 75%),
+    linear-gradient(180deg, var(--onyx-bg) 0%, #030407 100%);
+  color: var(--text-white);
+  box-sizing: border-box;
+}
+
+.campus-map-page * {
+  box-sizing: border-box;
+}
+
+.campus-map-page button {
+  font: inherit;
+  cursor: pointer;
+}
+
+/* TOPBAR */
+.campus-map-page .topbar {
+  min-height: 72px;
+  padding: 14px clamp(16px, 4vw, 56px);
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  background: rgba(7, 9, 14, 0.75);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+}
+
+.campus-map-page .brand {
+  color: var(--text-white);
+  text-decoration: none;
+  font-size: 20px;
+  letter-spacing: 0.08em;
+  font-weight: 800;
+  text-transform: uppercase;
+}
+
+.campus-map-page .brand b {
+  color: var(--electric-cyan);
+  text-shadow: 0 0 12px rgba(56, 213, 232, 0.6);
+}
+
+.campus-map-page .topbar > span {
+  font-size: 0.75rem;
+  letter-spacing: 0.26em;
+  color: var(--electric-cyan);
+  opacity: 0.9;
+  font-weight: 600;
+  text-transform: uppercase;
+}
+
+.campus-map-page .outline-btn {
+  margin-left: auto;
+  border: 1px solid var(--electric-cyan-border);
+  border-radius: 9999px;
+  background: rgba(56, 213, 232, 0.08);
+  color: var(--text-white);
+  padding: 8px 20px;
+  font-size: 0.82rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  transition: all 0.22s ease;
+  backdrop-filter: blur(8px);
+}
+
+.campus-map-page .outline-btn:hover {
+  background: rgba(56, 213, 232, 0.2);
+  border-color: var(--electric-cyan);
+  box-shadow: 0 0 16px var(--electric-cyan-glow);
+  transform: translateY(-2px);
+}
+
+/* HERO INTRO */
+.campus-map-page .intro {
+  text-align: center;
+  padding: 3.5rem 1.5rem 2rem;
+}
+
+.campus-map-page .eyebrow {
+  display: inline-block;
+  padding: 0.3rem 0.85rem;
+  background: rgba(14, 22, 38, 0.65);
+  border: 1px solid var(--electric-cyan-border);
+  border-radius: 9999px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  color: var(--electric-cyan);
+  backdrop-filter: blur(8px);
+  margin-bottom: 0.85rem;
+  text-transform: uppercase;
+}
+
+.campus-map-page .intro h1 {
+  font-size: clamp(2.4rem, 5vw, 4rem);
+  font-weight: 800;
+  letter-spacing: -0.01em;
+  color: var(--text-white);
+  text-transform: uppercase;
+  margin: 0 0 0.5rem;
+  text-shadow: 0 4px 24px rgba(0, 0, 0, 0.85);
+}
+
+.campus-map-page .intro p:last-child {
+  color: var(--text-sub);
+  font-size: 1rem;
+  margin: 0;
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.8);
+}
+
+/* ISOMETRIC CAMPUS CONTAINER WITH CINEMATIC ZOOM */
+.campus-map-page .campus-art {
+  width: min(1300px, 94vw);
+  margin: 0 auto 3.5rem;
+  position: relative;
+  border-radius: 20px;
+  overflow: hidden;
+  border: 1px solid var(--electric-cyan-border);
+  background: #080d15;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.7), 0 0 30px rgba(0, 0, 0, 0.5);
+}
+
+.campus-map-page .campus-art-stage {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  transform-origin: 44.2% 26%;
+  transition: transform 0.85s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: transform;
+}
+
+.campus-map-page .campus-art-stage.is-zoomed {
+  transform: scale(2.45);
+}
+
+.campus-map-page .campus-art-stage > img {
+  display: block;
+  width: 100%;
+  height: auto;
+  pointer-events: none;
+  user-select: none;
+}
+
+.campus-map-page .building-hitbox {
+  position: absolute;
+  left: 31%;
+  top: 13%;
+  width: 27%;
+  height: 25%;
+  cursor: pointer;
+  z-index: 5;
+  border-radius: 12px;
+}
+
+.campus-map-page .building-pin {
+  position: absolute;
+  left: 44.2%;
+  top: 23%;
+  transform: translate(-50%, -50%);
+  border: 1px solid var(--electric-indigo-border);
+  border-radius: 9999px;
+  background: rgba(14, 22, 38, 0.85);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  color: var(--text-white);
+  padding: 11px 22px;
+  font-size: clamp(12px, 1.3vw, 16px);
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  box-shadow: 0 10px 28px rgba(0, 0, 0, 0.6), 0 0 18px var(--electric-indigo-glow);
+  white-space: nowrap;
+  z-index: 6;
+  cursor: pointer;
+  transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), 
+              opacity 0.35s ease,
+              border-color 0.25s ease, 
+              background 0.25s ease,
+              box-shadow 0.25s ease;
+}
+
+.campus-map-page .campus-art-stage.is-zoomed .building-pin {
+  opacity: 0;
+  pointer-events: none;
+  transform: translate(-50%, -40%) scale(0.7);
+}
+
+.campus-map-page .building-pin:hover {
+  transform: translate(-50%, -55%);
+  background: rgba(22, 32, 52, 0.95);
+  border-color: var(--electric-indigo-neon);
+  box-shadow: 0 14px 34px rgba(0, 0, 0, 0.7), 0 0 24px var(--electric-indigo-neon);
+}
+
+.campus-map-page .pin-dot {
+  position: absolute;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: var(--electric-cyan);
+  left: calc(50% - 6px);
+  top: calc(100% + 32px);
+  box-shadow: 0 0 0 5px rgba(56, 213, 232, 0.4), 0 0 14px var(--electric-cyan);
+}
+
+.campus-map-page .building-pin::after {
+  content: "";
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  height: 38px;
+  border-left: 2px dashed var(--electric-cyan);
+}
+
+/* POPUP MODALS */
+.campus-map-page .modal-backdrop {
+  position: fixed;
+  inset: 0;
+  background: radial-gradient(circle at center, rgba(14, 22, 38, 0.75) 0%, rgba(7, 9, 14, 0.92) 100%);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  z-index: 1000;
+  padding: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.campus-map-page .modal {
+  position: relative;
+  background: rgba(10, 16, 26, 0.88);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+  color: var(--text-white);
+  border: 1px solid var(--electric-cyan-border);
+  border-radius: 20px;
+  box-shadow: 0 25px 80px rgba(0, 0, 0, 0.85), 0 0 35px rgba(56, 213, 232, 0.15);
+  max-height: 92vh;
+  overflow: auto;
+  width: min(100%, 1080px);
+  padding: 30px;
+}
+
+.campus-map-page .close {
+  position: absolute;
+  right: 18px;
+  top: 18px;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  background: rgba(14, 20, 32, 0.65);
+  color: var(--text-muted);
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  font-size: 20px;
+  line-height: 1;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+}
+
+.campus-map-page .close:hover {
+  background: #dc2626;
+  border-color: #ef4444;
+  color: #ffffff;
+  transform: scale(1.08);
+}
+
+.campus-map-page .academic-grid,
+.campus-map-page .room-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: 32px;
+  align-items: stretch;
+}
+
+.campus-map-page .slideshow {
+  min-height: 320px;
+  background: rgba(5, 7, 12, 0.75);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 14px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  position: relative;
+}
+
+.campus-map-page .slide-image {
+  width: 100%;
+  height: 330px;
+  object-fit: contain;
+  background: #05070c;
+  display: block;
+  cursor: pointer;
+}
+
+.campus-map-page .slide-dots {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  padding: 12px;
+  background: rgba(5, 7, 12, 0.85);
+}
+
+.campus-map-page .slide-dots button {
+  border: 0;
+  border-radius: 9999px;
+  width: 24px;
+  height: 4px;
+  padding: 0;
+  background: rgba(255, 255, 255, 0.2);
+  transition: all 0.3s ease;
+}
+
+.campus-map-page .slide-dots button.active {
+  width: 38px;
+  background: var(--electric-cyan);
+  box-shadow: 0 0 10px rgba(56, 213, 232, 0.7);
+}
+
+.campus-map-page .image-help {
+  font-size: 0.75rem;
+  color: var(--text-dark);
+  text-align: center;
+  padding: 0 10px 10px;
+  margin: 0;
+  background: rgba(5, 7, 12, 0.85);
+}
+
+.campus-map-page .details {
+  padding: 10px 10px 10px 0;
+}
+
+.campus-map-page .details h2,
+.campus-map-page .floor-modal h2 {
+  font-size: clamp(1.8rem, 3vw, 2.4rem);
+  font-weight: 800;
+  letter-spacing: -0.01em;
+  margin: 0 0 16px;
+  color: var(--text-white);
+  text-shadow: 0 4px 18px rgba(0, 0, 0, 0.85);
+}
+
+.campus-map-page .details label {
+  display: block;
+  font-size: 0.78rem;
+  text-transform: uppercase;
+  letter-spacing: 0.16em;
+  font-weight: 800;
+  color: var(--electric-cyan);
+  margin: 18px 0 6px;
+}
+
+.campus-map-page .editable-copy {
+  white-space: pre-line;
+  font-size: 0.9rem;
+  line-height: 1.6;
+  color: var(--text-sub);
+  min-height: 40px;
+  margin: 0;
+}
+
+.campus-map-page .floor-heading {
+  font-weight: 800;
+  margin: 24px 0 12px;
+  color: var(--text-white);
+  font-size: 0.82rem;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+}
+
+.campus-map-page .floor-buttons,
+.campus-map-page .floor-switcher {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.campus-map-page .floor-buttons button,
+.campus-map-page .floor-switcher button {
+  border: 1px solid var(--electric-cyan-border);
+  background: rgba(14, 20, 32, 0.65);
+  color: var(--text-white);
+  border-radius: 12px;
+  padding: 10px 18px;
+  font-weight: 700;
+  font-size: 0.84rem;
+  letter-spacing: 0.04em;
+  backdrop-filter: blur(10px);
+  transition: all 0.22s ease;
+}
+
+.campus-map-page .floor-buttons button:hover,
+.campus-map-page .floor-switcher button:hover {
+  background: rgba(22, 32, 52, 0.9);
+  border-color: var(--electric-cyan);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5), 0 0 14px var(--electric-cyan-glow);
+  transform: translateY(-2px);
+}
+
+/* FLOOR PLAN VIEWPORT & CONTRAST BLUEPRINT STAGE */
+.campus-map-page .floor-modal {
+  width: min(96vw, 1320px);
+  padding: 28px;
+}
+
+.campus-map-page .floor-modal-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 20px;
+  padding-right: 45px;
+}
+
+.campus-map-page .floor-modal-head h2 {
+  margin-bottom: 4px;
+}
+
+.campus-map-page .floor-modal-head p:not(.eyebrow) {
+  color: var(--text-muted);
+  font-size: 0.9rem;
+  margin: 0 0 10px;
+}
+
+.campus-map-page .floor-zoom-controls {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 8px;
+  margin: 0 0 12px;
+}
+
+.campus-map-page .floor-zoom-controls button {
+  padding: 6px 14px;
+  border: 1px solid var(--electric-cyan-border);
+  border-radius: 8px;
+  background: rgba(14, 22, 38, 0.7);
+  color: var(--text-white);
+  font-size: 15px;
+  font-weight: 700;
+  backdrop-filter: blur(10px);
+  transition: all 0.2s ease;
+}
+
+.campus-map-page .floor-zoom-controls button:hover {
+  border-color: var(--electric-cyan);
+  background: rgba(22, 32, 52, 0.95);
+  box-shadow: 0 0 12px var(--electric-cyan-glow);
+}
+
+/* HIGH-CONTRAST BLUEPRINT STAGE */
+.campus-map-page .floor-map-viewport {
+  width: 100%;
+  max-height: 64vh;
+  overflow: auto;
+  border: 1px solid var(--electric-cyan-border);
+  border-radius: 14px;
+  background-color: #172033;
+  background-image: 
+    linear-gradient(rgba(56, 213, 232, 0.06) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(56, 213, 232, 0.06) 1px, transparent 1px);
+  background-size: 32px 32px;
+  box-shadow: inset 0 0 40px rgba(0, 0, 0, 0.75);
+}
+
+.campus-map-page .plan-stage {
+  position: relative;
+  width: 100%;
+  min-width: 760px;
+  aspect-ratio: 1191 / 842;
+  background-color: transparent;
+}
+
+.campus-map-page .plan-stage > img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  filter: drop-shadow(0 12px 28px rgba(0, 0, 0, 0.85));
+}
+
+.campus-map-page .hotspot-layer {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.campus-map-page .room-hotspot {
+  position: absolute;
+  transform: translate(-50%, -50%);
+  min-width: 30px;
+  min-height: 18px;
+  padding: 0 4px;
+  border: 1px solid transparent;
+  background: transparent;
+  color: transparent;
+  cursor: pointer;
+  border-radius: 4px;
+  font-size: clamp(8px, 0.75vw, 12px);
+  line-height: 1.15;
+  transition: all 0.18s ease;
+}
+
+.campus-map-page .room-hotspot:hover,
+.campus-map-page .room-hotspot:focus-visible {
+  background: rgba(56, 213, 232, 0.4);
+  border-color: var(--electric-cyan);
+  outline: 2px solid #ffffff;
+  color: #ffffff;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.95);
+  font-weight: 800;
+  box-shadow: 0 0 18px rgba(56, 213, 232, 0.8);
+}
+
+.campus-map-page .plan-hint {
+  font-size: 0.82rem;
+  color: var(--text-dark);
+  margin: 14px 0 0;
+}
+
+.campus-map-page .room-modal {
+  width: min(100%, 1000px);
+}
+
+.campus-map-page .room-details {
+  padding-top: 15px;
+}
+
+.campus-map-page .room-grid .slideshow {
+  min-height: 350px;
+}
+
+.campus-map-page .room-grid .slide-image {
+  height: 360px;
+}
+
+/* GLOBAL SEARCH */
+.campus-map-page .global-room-search {
+  position: relative;
+  width: min(100%, 440px);
+  margin: 10px 0 16px;
+  z-index: 5;
+}
+
+.campus-map-page .search-input-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 16px;
+  border: 1px solid var(--electric-cyan-border);
+  border-radius: 12px;
+  background: rgba(14, 20, 32, 0.75);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  color: var(--text-white);
+  transition: border-color 0.25s ease, box-shadow 0.25s ease;
+}
+
+.campus-map-page .search-input-wrapper:focus-within {
+  border-color: var(--electric-cyan);
+  box-shadow: 0 0 18px var(--electric-cyan-glow);
+}
+
+.campus-map-page .search-input-wrapper input {
+  width: 100%;
+  border: none;
+  outline: none;
+  background: transparent;
+  color: var(--text-white);
+  font-size: 0.9rem;
+}
+
+.campus-map-page .search-input-wrapper input::placeholder {
+  color: var(--text-dark);
+}
+
+.campus-map-page .global-search-results {
+  position: absolute;
+  top: calc(100% + 8px);
+  left: 0;
+  right: 0;
+  max-height: 240px;
+  overflow-y: auto;
+  background: rgba(10, 16, 26, 0.95);
+  backdrop-filter: blur(16px);
+  border: 1px solid var(--electric-cyan-border);
+  border-radius: 12px;
+  box-shadow: 0 16px 36px rgba(0, 0, 0, 0.8), 0 0 18px rgba(56, 213, 232, 0.15);
+  z-index: 20;
+}
+
+.campus-map-page .global-search-result {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  width: 100%;
+  padding: 12px 16px;
+  border: none;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+  background: transparent;
+  color: var(--text-sub);
+  text-align: left;
+  cursor: pointer;
+  transition: background 0.15s ease, color 0.15s ease;
+}
+
+.campus-map-page .global-search-result:hover {
+  background: rgba(56, 213, 232, 0.12);
+  color: var(--text-white);
+}
+
+.campus-map-page .search-floor-label {
+  color: var(--electric-cyan);
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+}
+
+@media (max-width: 768px) {
+  .campus-map-page .academic-grid,
+  .campus-map-page .room-grid {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+
+  .campus-map-page .floor-modal-head {
+    display: block;
+    padding-right: 35px;
+  }
+
+  .campus-map-page .floor-switcher {
+    margin: 12px 0 14px;
+  }
+
+  .campus-map-page .topbar > span {
+    display: none;
+  }
+}

@@ -1,0 +1,58 @@
+:root {
+  /* Onyx Black Canvas */
+  --bg-onyx-deep: #07090e;
+  --bg-onyx-surface: #0e111a;
+  
+  /* Electrifying Indigo Accents */
+  --indigo-electric: #6366f1;
+  --indigo-glow: rgba(99, 102, 241, 0.45);
+  --indigo-deep: #4338ca;
+
+  /* High-Contrast Electric Cyan */
+  --accent-contrast: #22d3ee;
+  --accent-glow: rgba(34, 211, 238, 0.35);
+
+  /* Glassmorphism Specs */
+  --glass-bg: rgba(14, 17, 26, 0.55);
+  --glass-bg-elevated: rgba(20, 24, 38, 0.72);
+  --glass-border: rgba(99, 102, 241, 0.22);
+  --glass-border-bright: rgba(34, 211, 238, 0.4);
+  --glass-blur: blur(14px);
+
+  /* Typography */
+  --text-primary: #ffffff;
+  --text-muted: #94a3b8;
+  --text-dim: #64748b;
+
+  --font-display: 'Space Grotesk', system-ui, -apple-system, sans-serif;
+  --font-body: 'Inter', system-ui, -apple-system, sans-serif;
+  
+  line-height: 1.5;
+  color-scheme: dark;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background-color: var(--bg-onyx-deep);
+  color: var(--text-primary);
+  min-height: 100vh;
+  overflow-x: hidden;
+  user-select: none;
+  font-family: var(--font-body);
+  font-weight: 500;
+  -webkit-font-smoothing: antialiased;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button {
+  font-family: inherit;
+}
