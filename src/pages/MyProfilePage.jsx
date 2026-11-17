@@ -903,6 +903,41 @@ export default function MyProfilePage() {
       payload.is_admin = updates.role === 'admin';
     }
 
+    
+    const handleAdminDeleteUser = async (targetUser) => {
+    if (!targetUser || targetUser.id === user?.id) return;
+    const confirmed = window.confirm(
+      `Permanently delete ${targetUser.full_name || targetUser.email} from CampusVerse? This removes their login account, ID card, connections, and team records.`
+    );
+    if (!confirmed) return;
+
+    setAdminBanner({ type: '', text: '' });
+
+    // Clean up cutout image in storage if present
+    const { data: targetProfile } = await supabase
+      .from('profiles')
+      .select('cutout_url')
+      .eq('id', targetUser.id)
+      .single();
+
+    if (targetProfile?.cutout_url) {
+      await deletePreviousCutoutFromStorage(targetProfile.cutout_url);
+    }
+
+    const { error } = await supabase.rpc('admin_delete_student', {
+      target_user_id: targetUser.id
+    });
+
+    if (error) {
+      setAdminBanner({ type: 'error', text: error.message });
+    } else {
+      setAllUsers((prev) => prev.filter((u) => u.id !== targetUser.id));
+      setAdminBanner({
+        type: 'success',
+        text: `Removed ${targetUser.full_name || targetUser.email}.`
+      });
+    }
+  };
     const { error } = await supabase
       .from('profiles')
       .update(payload)
@@ -2449,6 +2484,17 @@ export default function MyProfilePage() {
                               </>
                             )}
                           </button>
+                          {student.id !== user?.id && (
+                            <button
+                              type="button"
+                              onClick={() => handleAdminDeleteUser(student)}
+                              className="outline-btn btn-logout"
+                              title="Delete student permanently"
+                              aria-label={`Delete ${student.full_name}`}
+                            >
+                              <Trash2 size={14} />
+                            </button>
+                          )}
                         </div>
                       </div>
                     );

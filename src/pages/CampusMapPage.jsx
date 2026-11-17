@@ -854,25 +854,33 @@ const ROOM_DATA = {
 
 function buildAssetCandidates(src) {
   if (!src) return [];
-  const candidates = new Set([src]);
+  const candidates = new Set();
 
   const folderVariants = [
     src,
-    src.replace(/\/assets\/(ground|first|second)\//i, (_, f) => `/assets/${f.charAt(0).toUpperCase() + f.slice(1).toLowerCase()}/`),
+    src.replace(
+      /\/assets\/(ground|first|second)\//i,
+      (_, f) => `/assets/${f.charAt(0).toUpperCase() + f.slice(1).toLowerCase()}/`
+    ),
     src.replace(/\/assets\/(ground|first|second)\//i, (_, f) => `/assets/${f.toLowerCase()}/`)
   ];
 
-  const exts = ['.jpg', '.png', '.jpeg', '.webp'];
+  // Prioritize fast compressed .webp first, then fall back to original extensions
+  folderVariants.forEach((variant) => {
+    const base = variant.replace(/\.(png|jpe?g|webp)$/i, '');
+    candidates.add(`${base}.webp`);
+  });
+
   folderVariants.forEach((variant) => {
     candidates.add(variant);
     const base = variant.replace(/\.(png|jpe?g|webp)$/i, '');
-    exts.forEach((ext) => candidates.add(`${base}${ext}`));
+    ['.jpg', '.png', '.jpeg'].forEach((ext) => candidates.add(`${base}${ext}`));
   });
 
   return Array.from(candidates);
 }
 
-function SmartMapImage({ src, alt, className, onClick }) {
+function SmartMapImage({ src, alt, className, onClick, fallbackNotice = true }) {
   const candidates = buildAssetCandidates(src);
   const [attemptIdx, setAttemptIdx] = useState(0);
 
@@ -881,6 +889,7 @@ function SmartMapImage({ src, alt, className, onClick }) {
   }, [src]);
 
   if (candidates.length === 0 || attemptIdx >= candidates.length) {
+    if (!fallbackNotice) return null;
     return (
       <div style={{ textAlign: 'center', color: '#64748b', padding: '60px 20px' }}>
         <p style={{ margin: 0, fontSize: '0.85rem' }}>Photographs coming soon</p>
@@ -893,6 +902,7 @@ function SmartMapImage({ src, alt, className, onClick }) {
       className={className}
       src={candidates[attemptIdx]}
       alt={alt}
+      decoding="async"
       onClick={onClick}
       onError={() => setAttemptIdx((prev) => prev + 1)}
     />
@@ -981,6 +991,7 @@ export default function CampusMapPage() {
     if (viewportRef.current) viewportRef.current.scrollTo({ left: 0, top: 0 });
   };
 
+  // Automatic 4.5s slideshow for Academic Block modal
   useEffect(() => {
     if (!academicModalOpen || ACADEMIC_DATA.images.length <= 1) return;
     const timer = setInterval(() => {
@@ -989,6 +1000,7 @@ export default function CampusMapPage() {
     return () => clearInterval(timer);
   }, [academicModalOpen]);
 
+  // Automatic 4.5s slideshow for Room modal
   useEffect(() => {
     const imgs = currentRoom?.images || [];
     if (!roomModalOpen || imgs.length <= 1) return;
@@ -997,6 +1009,24 @@ export default function CampusMapPage() {
     }, 4500);
     return () => clearInterval(timer);
   }, [roomModalOpen, currentRoom]);
+
+  // Preload next slide in the background so switching photos is instant
+  useEffect(() => {
+    const imgs = roomModalOpen
+      ? currentRoom?.images
+      : academicModalOpen
+      ? ACADEMIC_DATA.images
+      : null;
+    if (!imgs || imgs.length <= 1) return;
+
+    const activeIdx = roomModalOpen ? roomSlideIdx : academicSlideIdx;
+    const nextSrc = imgs[(activeIdx + 1) % imgs.length];
+    const nextCandidates = buildAssetCandidates(nextSrc);
+    if (nextCandidates[0]) {
+      const preload = new Image();
+      preload.src = nextCandidates[0];
+    }
+  }, [roomModalOpen, academicModalOpen, currentRoom, roomSlideIdx, academicSlideIdx]);
 
   useEffect(() => {
     const handleKeyDown = (event) => {
@@ -1117,13 +1147,10 @@ export default function CampusMapPage() {
         {/* Isometric Artwork Map with Cinematic Zoom Stage */}
         <section className="campus-art">
           <div className={`campus-art-stage ${isZoomed ? 'is-zoomed' : ''}`}>
-            <img
+            <SmartMapImage
               src="/assets/Campus-isometric.jpg"
               alt="Isometric campus map"
-              onError={(e) => {
-                e.currentTarget.onerror = null;
-                e.currentTarget.src = '/assets/Campus-isometric.png';
-              }}
+              fallbackNotice={false}
             />
 
             {/* Clickable building facade hitbox */}
