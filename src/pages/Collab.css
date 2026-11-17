@@ -1,0 +1,315 @@
+.collab-page {
+  --onyx-bg: #07090e;
+  --crystal-glass: rgba(255, 255, 255, 0.032);
+  --crystal-glass-elevated: rgba(255, 255, 255, 0.06);
+  --crystal-glass-hover: rgba(255, 255, 255, 0.085);
+  --crystal-border: rgba(255, 255, 255, 0.12);
+  --crystal-border-bright: rgba(255, 255, 255, 0.25);
+  --crystal-specular: inset 0 1px 0 rgba(255, 255, 255, 0.18), inset 0 -1px 0 rgba(255, 255, 255, 0.04);
+  --electric-cyan: #38d5e8;
+  --electric-indigo-neon: #818cf8;
+  --text-white: #ffffff;
+  --text-sub: #cbd5e1;
+  --text-muted: #94a3b8;
+  --text-dark: #64748b;
+
+  position: relative;
+  min-height: 100vh;
+  background: linear-gradient(180deg, #07090e 0%, #05070b 55%, #030407 100%);
+  color: var(--text-white);
+  font-family: var(--font-display, "Segoe UI", Arial, sans-serif);
+  padding-bottom: 6rem;
+  overflow-x: hidden;
+}
+
+.collab-page * {
+  box-sizing: border-box;
+}
+
+.collab-orb-green,
+.collab-orb-blue {
+  position: fixed;
+  border-radius: 50%;
+  filter: blur(115px);
+  pointer-events: none;
+  z-index: 0;
+  opacity: 0.36;
+}
+
+.collab-orb-green {
+  width: 450px;
+  height: 450px;
+  top: 8%;
+  left: 8%;
+  background: radial-gradient(circle, rgba(16, 185, 129, 0.58), transparent 70%);
+}
+
+.collab-orb-blue {
+  width: 480px;
+  height: 480px;
+  bottom: 8%;
+  right: 8%;
+  background: radial-gradient(circle, rgba(56, 213, 232, 0.5), transparent 70%);
+}
+
+.collab-page .topbar {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  min-height: 72px;
+  padding: 14px clamp(16px, 4vw, 56px);
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  background: rgba(7, 9, 14, 0.78);
+  backdrop-filter: blur(18px);
+}
+
+.collab-page .brand {
+  color: #ffffff;
+  text-decoration: none;
+  font-size: 20px;
+  letter-spacing: 0.08em;
+  font-weight: 800;
+}
+
+.collab-page .brand b {
+  color: var(--electric-cyan);
+}
+
+.collab-page .topbar > span {
+  font-size: 0.75rem;
+  letter-spacing: 0.26em;
+  color: var(--electric-cyan);
+  font-weight: 600;
+}
+
+.collab-page .outline-btn {
+  border: 1px solid var(--crystal-border);
+  border-radius: 9999px;
+  background: var(--crystal-glass);
+  color: #ffffff;
+  padding: 8px 18px;
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-decoration: none;
+  backdrop-filter: blur(16px);
+  box-shadow: var(--crystal-specular);
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  transition: all 0.2s ease;
+}
+
+.collab-page .outline-btn:hover {
+  border-color: var(--electric-cyan);
+  background: var(--crystal-glass-hover);
+  transform: translateY(-2px);
+}
+
+.collab-container {
+  position: relative;
+  z-index: 2;
+  max-width: 1200px;
+  margin: 2.2rem auto 0;
+  padding: 0 1.5rem;
+}
+
+.collab-toolbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+  margin-bottom: 2rem;
+}
+
+.collab-tabs {
+  display: flex;
+  gap: 0.65rem;
+  flex-wrap: wrap;
+}
+
+.collab-tab-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 0.65rem 1.25rem;
+  border-radius: 9999px;
+  border: 1px solid var(--crystal-border);
+  background: var(--crystal-glass);
+  color: var(--text-muted);
+  font-size: 0.78rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.collab-tab-btn.active,
+.collab-tab-btn:hover {
+  background: rgba(255, 255, 255, 0.09);
+  border-color: var(--electric-cyan);
+  color: #ffffff;
+}
+
+.collab-badge-pill {
+  background: var(--electric-cyan);
+  color: #030407;
+  font-size: 0.7rem;
+  font-weight: 900;
+  padding: 1px 7px;
+  border-radius: 9999px;
+}
+
+.collab-glass-panel {
+  background: var(--crystal-glass);
+  backdrop-filter: blur(28px) saturate(135%);
+  -webkit-backdrop-filter: blur(28px) saturate(135%);
+  border: 1px solid var(--crystal-border);
+  border-radius: 26px;
+  padding: 2.2rem;
+  margin-bottom: 2rem;
+  box-shadow: 0 28px 75px rgba(0, 0, 0, 0.85), var(--crystal-specular);
+}
+
+.collab-form-grid-3 {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.15rem;
+}
+
+.collab-form-grid-2 {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.15rem;
+}
+
+.collab-field {
+  margin-bottom: 1.1rem;
+}
+
+.collab-field label {
+  display: block;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--text-sub);
+  margin-bottom: 0.45rem;
+}
+
+.collab-input {
+  width: 100%;
+  padding: 0.8rem 1rem;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.13);
+  border-radius: 12px;
+  color: #ffffff;
+  font-size: 0.88rem;
+  outline: none;
+}
+
+.collab-input option {
+  background: #090c12;
+  color: #ffffff;
+}
+
+.collab-input:focus {
+  border-color: var(--electric-cyan);
+  background: rgba(255, 255, 255, 0.06);
+}
+
+.collab-teams-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+  gap: 1.35rem;
+}
+
+.team-glass-card {
+  background: var(--crystal-glass);
+  backdrop-filter: blur(28px) saturate(135%);
+  -webkit-backdrop-filter: blur(28px) saturate(135%);
+  border: 1px solid var(--crystal-border);
+  border-radius: 24px;
+  padding: 1.75rem;
+  box-shadow: 0 22px 55px rgba(0, 0, 0, 0.78), var(--crystal-specular);
+  display: flex;
+  flex-direction: column;
+  gap: 1.1rem;
+  transition: border-color 0.22s ease, transform 0.22s ease;
+}
+
+.team-glass-card:hover {
+  border-color: rgba(56, 213, 232, 0.4);
+  transform: translateY(-2px);
+}
+
+.team-card-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+}
+
+.team-tag {
+  font-size: 0.68rem;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  padding: 3px 10px;
+  border-radius: 9999px;
+  border: 1px solid rgba(56, 213, 232, 0.35);
+  color: var(--electric-cyan);
+}
+
+.team-roster-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  padding: 0.85rem 1rem;
+  border-radius: 14px;
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(255, 255, 255, 0.07);
+}
+
+.team-roster-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.82rem;
+  gap: 0.5rem;
+}
+
+.team-roster-row strong {
+  color: #ffffff;
+}
+
+.team-roster-row span {
+  color: var(--electric-cyan);
+  font-size: 0.74rem;
+  font-weight: 700;
+}
+
+.team-card-footer {
+  margin-top: auto;
+  padding-top: 1rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+}
+
+@media (max-width: 860px) {
+  .collab-form-grid-3,
+  .collab-form-grid-2 {
+    grid-template-columns: 1fr;
+  }
+}

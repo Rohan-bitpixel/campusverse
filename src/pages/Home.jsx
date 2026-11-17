@@ -14,13 +14,28 @@ import {
   GraduationCap,
   Navigation
 } from 'lucide-react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import { useAuth } from '../context/AuthContext';
+import AuthModal from '../components/AuthModal.jsx';
 import KineticRibbon from '../components/KineticRibbon.jsx';
 import DailyVerse from '../components/DailyVerse.jsx';
 import TransitMap from './TransitMap.jsx';
 import './Home.css';
 
 export default function Home() {
+  const { user } = useAuth();
+  const navigate = useNavigate();
+  const [profileAuthOpen, setProfileAuthOpen] = useState(false);
+
+  const handleProfileTileClick = (e) => {
+    e.preventDefault();
+    if (user) {
+      navigate('/profile');
+    } else {
+      setProfileAuthOpen(true);
+    }
+  };
+
   const [droneOffset, setDroneOffset] = useState(0);
   const droneSectionRef = useRef(null);
 
@@ -109,7 +124,6 @@ export default function Home() {
             </div>
           </Link>
 
-          {/* Clean route to the dedicated map page */}
           <Link to="/map" className="tile-card tile-map">
             <div className="tile-inner">
               <div className="icon-stage">
@@ -119,33 +133,39 @@ export default function Home() {
             </div>
           </Link>
 
-      <Link to="/profile" className="tile-card tile-profile">
-  <div className="tile-inner">
-    <div className="icon-stage">
-      <span className="biometric-beam" />
-      <Fingerprint className="tile-icon icon-profile" size={28} />
-    </div>
-    <span className="tile-title">MY PROFILE</span>
-  </div>
-</Link>
+          <div
+            role="button"
+            tabIndex={0}
+            onClick={handleProfileTileClick}
+            onKeyDown={(e) => e.key === 'Enter' && handleProfileTileClick(e)}
+            className="tile-card tile-profile"
+          >
+            <div className="tile-inner">
+              <div className="icon-stage">
+                <span className="biometric-beam" />
+                <Fingerprint className="tile-icon icon-profile" size={28} />
+              </div>
+              <span className="tile-title">MY PROFILE</span>
+            </div>
+          </div>
 
-          <div className="tile-card tile-id">
+          <Link to="/student-id" className="tile-card tile-id">
             <div className="tile-inner">
               <div className="icon-stage">
                 <CreditCard className="tile-icon icon-id" size={28} />
               </div>
               <span className="tile-title">STUDENT ID</span>
             </div>
-          </div>
+          </Link>
 
-          <div className="tile-card tile-events">
+          <Link to="/events" className="tile-card tile-events">
             <div className="tile-inner">
               <div className="icon-stage">
                 <Calendar className="tile-icon icon-events" size={28} />
               </div>
               <span className="tile-title">EVENTS</span>
             </div>
-          </div>
+          </Link>
         </div>
       </section>
 
@@ -258,35 +278,41 @@ export default function Home() {
               </div>
             </Link>
 
-            <div className="drone-card">
-              <div className="drone-icon-box">
-                <GitPullRequest size={24} />
+            <Link to="/collab" style={{ textDecoration: 'none', color: 'inherit' }}>
+              <div className="drone-card" style={{ cursor: 'pointer' }}>
+                <div className="drone-icon-box">
+                  <GitPullRequest size={24} />
+                </div>
+                <div className="drone-card-text">
+                  <h3>Collab Board</h3>
+                  <p>Form hackathon rosters, coordinate group assignments, and post open collaboration calls across engineering batches.</p>
+                </div>
               </div>
-              <div className="drone-card-text">
-                <h3>Collab Board</h3>
-                <p>Form hackathon rosters, coordinate group assignments, and post open collaboration calls across engineering batches.</p>
-              </div>
-            </div>
+            </Link>
 
-            <div className="drone-card">
-              <div className="drone-icon-box">
-                <Calendar size={24} />
+            <Link to="/events" style={{ textDecoration: 'none', color: 'inherit' }}>
+              <div className="drone-card" style={{ cursor: 'pointer' }}>
+                <div className="drone-icon-box">
+                  <Calendar size={24} />
+                </div>
+                <div className="drone-card-text">
+                  <h3>Know the Events</h3>
+                  <p>Stay updated on technical fests, cultural celebrations, competitive club meets, and guest speaker sessions.</p>
+                </div>
               </div>
-              <div className="drone-card-text">
-                <h3>Know the Events</h3>
-                <p>Stay updated on technical fests, cultural celebrations, competitive club meets, and guest speaker sessions.</p>
-              </div>
-            </div>
+            </Link>
 
-            <div className="drone-card">
-              <div className="drone-icon-box">
-                <UserPlus size={24} />
+            <Link to="/student-id" style={{ textDecoration: 'none', color: 'inherit' }}>
+              <div className="drone-card" style={{ cursor: 'pointer' }}>
+                <div className="drone-icon-box">
+                  <UserPlus size={24} />
+                </div>
+                <div className="drone-card-text">
+                  <h3>Find a Teammate</h3>
+                  <p>Discover student peers by programming skills, project domain interests, tech stacks, and academic years.</p>
+                </div>
               </div>
-              <div className="drone-card-text">
-                <h3>Find a Teammate</h3>
-                <p>Discover student peers by programming skills, project domain interests, tech stacks, and academic years.</p>
-              </div>
-            </div>
+            </Link>
           </div>
         </div>
       </section>
@@ -373,6 +399,15 @@ export default function Home() {
           </div>
         </div>
       </footer>
+
+      <AuthModal
+        isOpen={profileAuthOpen}
+        onClose={() => setProfileAuthOpen(false)}
+        onSuccess={() => {
+          setProfileAuthOpen(false);
+          navigate('/profile');
+        }}
+      />
     </div>
   );
 }

@@ -1,0 +1,277 @@
+.crystal-auth-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 1200;
+  padding: 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(3, 4, 7, 0.78);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+  animation: authBackdropFade 0.22s ease-out;
+}
+
+@keyframes authBackdropFade {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+.crystal-auth-modal {
+  position: relative;
+  width: 100%;
+  max-width: 440px;
+  background: rgba(255, 255, 255, 0.032);
+  backdrop-filter: blur(32px) saturate(140%);
+  -webkit-backdrop-filter: blur(32px) saturate(140%);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  border-radius: 26px;
+  padding: 2.35rem;
+  color: #ffffff;
+  font-family: var(--font-display, "Segoe UI", Arial, sans-serif);
+  box-shadow:
+    0 30px 80px rgba(0, 0, 0, 0.9),
+    inset 0 1px 1px rgba(255, 255, 255, 0.22),
+    inset 0 -1px 0 rgba(255, 255, 255, 0.04);
+  animation: authModalRise 0.28s cubic-bezier(0.22, 1, 0.36, 1);
+  overflow: hidden;
+}
+
+.crystal-auth-modal::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 12%;
+  right: 12%;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.45), transparent);
+  pointer-events: none;
+}
+
+@keyframes authModalRise {
+  from {
+    opacity: 0;
+    transform: translateY(14px) scale(0.97);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.crystal-auth-close {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  background: rgba(255, 255, 255, 0.03);
+  color: #94a3b8;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.crystal-auth-close:hover {
+  border-color: #38d5e8;
+  color: #ffffff;
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.crystal-auth-header {
+  text-align: center;
+  margin-bottom: 1.65rem;
+}
+
+.crystal-auth-badge {
+  width: 52px;
+  height: 52px;
+  margin: 0 auto 0.9rem;
+  border-radius: 16px;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #38d5e8;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.18), 0 8px 20px rgba(0, 0, 0, 0.5);
+}
+
+.crystal-auth-header h2 {
+  font-size: 1.32rem;
+  font-weight: 800;
+  letter-spacing: 0.06em;
+  margin: 0 0 0.25rem;
+  color: #ffffff;
+}
+
+.crystal-auth-header p {
+  font-size: 0.8rem;
+  letter-spacing: 0.08em;
+  color: #94a3b8;
+  margin: 0;
+}
+
+.crystal-auth-tabs {
+  display: flex;
+  background: rgba(0, 0, 0, 0.45);
+  border-radius: 14px;
+  padding: 5px;
+  margin-bottom: 1.65rem;
+  border: 1px solid rgba(255, 255, 255, 0.09);
+  box-shadow: inset 0 2px 8px rgba(0, 0, 0, 0.65);
+}
+
+.crystal-auth-tab {
+  flex: 1;
+  padding: 10px;
+  background: transparent;
+  border: 1px solid transparent;
+  border-radius: 10px;
+  color: #94a3b8;
+  font-size: 0.82rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  cursor: pointer;
+  transition: all 0.22s ease;
+}
+
+.crystal-auth-tab.active {
+  background: rgba(255, 255, 255, 0.08);
+  border-color: rgba(255, 255, 255, 0.2);
+  color: #ffffff;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.45), inset 0 1px 0 rgba(255, 255, 255, 0.22);
+}
+
+.crystal-auth-group {
+  margin-bottom: 1.15rem;
+}
+
+.crystal-auth-group label {
+  display: block;
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  color: #cbd5e1;
+  margin-bottom: 0.45rem;
+}
+
+.crystal-password-wrap {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.crystal-auth-input {
+  width: 100%;
+  padding: 0.82rem 1rem;
+  background: rgba(255, 255, 255, 0.03);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.13);
+  border-radius: 12px;
+  color: #ffffff;
+  font-size: 0.9rem;
+  outline: none;
+  box-sizing: border-box;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.08);
+  transition: all 0.2s ease;
+}
+
+.crystal-auth-input::placeholder {
+  color: #64748b;
+}
+
+.crystal-auth-input:focus {
+  border-color: #38d5e8;
+  background: rgba(255, 255, 255, 0.06);
+  box-shadow: 0 0 16px rgba(56, 213, 232, 0.18), inset 0 1px 0 rgba(255, 255, 255, 0.14);
+}
+
+.crystal-eye-btn {
+  position: absolute;
+  right: 12px;
+  background: transparent;
+  border: none;
+  color: #cbd5e1;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  padding: 4px;
+}
+
+.crystal-eye-btn:hover {
+  color: #38d5e8;
+}
+
+.crystal-forgot-row {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: -0.55rem;
+  margin-bottom: 1rem;
+}
+
+.crystal-link-btn {
+  background: none;
+  border: none;
+  color: #94a3b8;
+  font-size: 0.78rem;
+  font-weight: 600;
+  cursor: pointer;
+  text-decoration: underline;
+  transition: color 0.2s ease;
+}
+
+.crystal-link-btn:hover {
+  color: #38d5e8;
+}
+
+.crystal-auth-alert {
+  padding: 0.75rem 0.9rem;
+  border-radius: 11px;
+  font-size: 0.82rem;
+  margin-bottom: 0.9rem;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid #38d5e8;
+  color: #ffffff;
+}
+
+.crystal-auth-alert.error {
+  background: rgba(239, 68, 68, 0.14);
+  border-color: #ef4444;
+  color: #fca5a5;
+}
+
+.crystal-auth-submit {
+  width: 100%;
+  padding: 0.95rem;
+  margin-top: 0.5rem;
+  border: 1px solid rgba(255, 255, 255, 0.24);
+  border-radius: 13px;
+  background: rgba(255, 255, 255, 0.07);
+  backdrop-filter: blur(16px);
+  color: #ffffff;
+  font-size: 0.9rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.55), inset 0 1px 0 rgba(255, 255, 255, 0.25);
+  cursor: pointer;
+  transition: all 0.22s ease;
+}
+
+.crystal-auth-submit:hover:not(:disabled) {
+  background: rgba(255, 255, 255, 0.12);
+  border-color: #38d5e8;
+  box-shadow: 0 0 22px rgba(56, 213, 232, 0.25), inset 0 1px 0 rgba(255, 255, 255, 0.35);
+  transform: translateY(-2px);
+}
+
+.crystal-auth-submit:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
