@@ -1,4 +1,5 @@
 ﻿import React, { useState } from 'react';
+import { createPortal } from 'react-dom';
 import { Eye, EyeOff, Fingerprint, X } from 'lucide-react';
 import { useAuth } from '../context/AuthContext';
 import './AuthModal.css';
@@ -53,9 +54,14 @@ export default function AuthModal({ isOpen, onClose, onSuccess }) {
     }
   };
 
-  return (
-    <div className="crystal-auth-backdrop">
-      <div className="crystal-auth-modal" role="dialog" aria-modal="true">
+  return createPortal(
+    <div className="crystal-auth-backdrop" onClick={onClose}>
+      <div
+        className="crystal-auth-modal"
+        role="dialog"
+        aria-modal="true"
+        onClick={(e) => e.stopPropagation()}
+      >
         <button
           type="button"
           className="crystal-auth-close"
@@ -197,6 +203,7 @@ export default function AuthModal({ isOpen, onClose, onSuccess }) {
           )}
         </form>
       </div>
-    </div>
+    </div>,
+    document.body
   );
 }

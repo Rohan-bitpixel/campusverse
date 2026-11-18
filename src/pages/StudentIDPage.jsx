@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import {
   Award,
   Briefcase,
@@ -150,6 +150,8 @@ async function fetchPeerLiveStats(person) {
 
 export default function StudentIDPage() {
   const { user } = useAuth();
+  const { token: urlToken } = useParams();
+  const handledUrlTokenRef = useRef(null);
   const [students, setStudents] = useState([]);
   const [statsMap, setStatsMap] = useState({});
   const [fetchingIds, setFetchingIds] = useState({});
@@ -348,6 +350,12 @@ export default function StudentIDPage() {
       setTokenInput('');
     }
   };
+
+  useEffect(() => {
+    if (!urlToken || students.length === 0 || handledUrlTokenRef.current === urlToken) return;
+    handledUrlTokenRef.current = urlToken;
+    verifyQrToken(urlToken);
+  }, [urlToken, students]);
 
   useEffect(() => {
     if (!scannerOpen) return;

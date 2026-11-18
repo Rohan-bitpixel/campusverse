@@ -1,9 +1,9 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { 
-  Users, 
-  MapPin, 
-  Fingerprint, 
-  CreditCard, 
+import {
+  Users,
+  MapPin,
+  Fingerprint,
+  CreditCard,
   Calendar,
   Compass,
   UserPlus,
@@ -36,65 +36,89 @@ export default function Home() {
     }
   };
 
-  const [droneOffset, setDroneOffset] = useState(0);
+  // GPU-accelerated parallax without triggering React state re-renders on scroll
   const droneSectionRef = useRef(null);
+  const droneBgRef = useRef(null);
 
   useEffect(() => {
-    const handleScroll = () => {
-      if (!droneSectionRef.current) return;
+    let ticking = false;
+
+    const updateParallax = () => {
+      ticking = false;
+      if (!droneSectionRef.current || !droneBgRef.current) return;
       const rect = droneSectionRef.current.getBoundingClientRect();
       const windowHeight = window.innerHeight;
-      
+
       if (rect.top < windowHeight && rect.bottom > 0) {
-        const relativeScroll = rect.top - (windowHeight / 2);
-        setDroneOffset(relativeScroll * -0.18);
+        const relativeScroll = rect.top - windowHeight / 2;
+        const offset = relativeScroll * -0.18;
+        droneBgRef.current.style.transform = `translate3d(0, ${offset}px, 0)`;
+      }
+    };
+
+    const handleScroll = () => {
+      if (!ticking) {
+        window.requestAnimationFrame(updateParallax);
+        ticking = true;
       }
     };
 
     window.addEventListener('scroll', handleScroll, { passive: true });
-    handleScroll();
+    updateParallax();
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
+  // Video playback & slide synchronization
   const videoRef = useRef(null);
   const [activeSlide, setActiveSlide] = useState(0);
+  const activeSlideRef = useRef(0);
 
   useEffect(() => {
-    if (videoRef.current) {
-      videoRef.current.muted = true;
-      videoRef.current.defaultMuted = true;
-      videoRef.current.play().catch(() => {});
+    const vid = videoRef.current;
+    if (!vid) return;
+    vid.muted = true;
+    vid.defaultMuted = true;
+    const playPromise = vid.play();
+    if (playPromise !== undefined) {
+      playPromise.catch(() => {
+        vid.addEventListener(
+          'loadeddata',
+          () => {
+            vid.muted = true;
+            vid.play().catch(() => {});
+          },
+          { once: true }
+        );
+      });
     }
   }, []);
 
   const handleTimeUpdate = () => {
     if (!videoRef.current) return;
     const t = videoRef.current.currentTime;
+    const nextSlide = t < 3.0 ? 0 : t < 7.0 ? 1 : 2;
 
-    if (t < 1.0) {
-      setActiveSlide(0);
-    } else if (t < 7.0) {
-      setActiveSlide(1);
-    } else {
-      setActiveSlide(2);
+    if (nextSlide !== activeSlideRef.current) {
+      activeSlideRef.current = nextSlide;
+      setActiveSlide(nextSlide);
     }
   };
 
   const slides = [
     {
-      metric: "50+ ACRES",
-      title: "WORLD-CLASS INFRASTRUCTURE",
-      subtitle: "Smart sustainable architecture built for research and collegiate living."
+      metric: '50+ ACRES',
+      title: 'WORLD-CLASS INFRASTRUCTURE',
+      subtitle: 'Smart sustainable architecture built for research and collegiate living.'
     },
     {
-      metric: "NEXT-GEN TECH",
-      title: "ADVANCED AI & ROBOTICS LABS",
-      subtitle: "High-compute clusters and testbeds powering breakthrough engineering."
+      metric: 'NEXT-GEN TECH',
+      title: 'ADVANCED AI & ROBOTICS LABS',
+      subtitle: 'High-compute clusters and testbeds powering breakthrough engineering.'
     },
     {
-      metric: "ELECTRIC ATMOSPHERE",
-      title: "FLAGSHIP FESTS & ARENAS",
-      subtitle: "High-energy national hackathons, cultural festivals, and competitive sports."
+      metric: 'ELECTRIC ATMOSPHERE',
+      title: 'FLAGSHIP FESTS & ARENAS',
+      subtitle: 'High-energy national hackathons, cultural festivals, and competitive sports.'
     }
   ];
 
@@ -173,13 +197,22 @@ export default function Home() {
       <section className="ambient-video-hero">
         <video
           ref={videoRef}
-          className="ambient-video-player"
           src="/campus-reel.mp4"
           autoPlay
-          loop
           muted
+          loop
           playsInline
+          preload="auto"
           onTimeUpdate={handleTimeUpdate}
+          style={{
+            position: 'absolute',
+            inset: 0,
+            width: '100%',
+            height: '100%',
+            objectFit: 'cover',
+            pointerEvents: 'none',
+            zIndex: 0
+          }}
         />
 
         <div className="video-scrim-top" />
@@ -252,10 +285,7 @@ export default function Home() {
 
       {/* --- SECTION 1: 3D PARALLAX DRONE FEATURES --- */}
       <section ref={droneSectionRef} className="drone-features-section">
-        <div 
-          className="drone-parallax-bg" 
-          style={{ transform: `translate3d(0, ${droneOffset}px, 0)` }}
-        />
+        <div ref={droneBgRef} className="drone-parallax-bg" />
         <div className="drone-features-overlay" />
 
         <div className="section-container relative-content">

@@ -38,6 +38,8 @@ import { useAuth } from '../context/AuthContext';
 import { supabase } from '../lib/supabaseClient';
 import './MyProfile.css';
 
+const PRODUCTION_APP_URL = (import.meta.env.VITE_APP_URL || 'https://campusverse-trqc.vercel.app').replace(/\/$/, '');
+
 const RECOMMENDED_SKILLS = [
   'Java', 'Python', 'React', 'Three.js', 'C++', 'SQL',
   'Machine Learning', 'Django', 'Node.js', 'UI/UX', 'Docker', 'DSA'
@@ -283,7 +285,7 @@ export default function MyProfilePage() {
 
   // Connect & Collab Team Requests Inbox State
   const [inboxOpen, setInboxOpen] = useState(false);
-  const [inboxTab, setInboxTab] = useState('incoming'); // 'incoming' | 'outgoing' | 'team'
+  const [inboxTab, setInboxTab] = useState('incoming');
   const [incomingRequests, setIncomingRequests] = useState([]);
   const [outgoingRequests, setOutgoingRequests] = useState([]);
   const [teamRequests, setTeamRequests] = useState([]);
@@ -311,7 +313,7 @@ export default function MyProfilePage() {
   const [uploading, setUploading] = useState(false);
   const [banner, setBanner] = useState({ type: '', text: '' });
 
-  // Club Head / Admin Event Publisher state (Multiple Attachments)
+  // Club Head / Admin Event Publisher state
   const [myEvents, setMyEvents] = useState([]);
   const [eventMediaFiles, setEventMediaFiles] = useState([]);
   const [publishingEvent, setPublishingEvent] = useState(false);
@@ -903,8 +905,23 @@ export default function MyProfilePage() {
       payload.is_admin = updates.role === 'admin';
     }
 
-    
-    const handleAdminDeleteUser = async (targetUser) => {
+    const { error } = await supabase
+      .from('profiles')
+      .update(payload)
+      .eq('id', targetUserId);
+
+    if (error) {
+      setAdminBanner({ type: 'error', text: error.message });
+    } else {
+      setAllUsers((prev) =>
+        prev.map((u) => (u.id === targetUserId ? { ...u, ...payload } : u))
+      );
+      if (targetUserId === user.id) refreshProfile();
+      setAdminBanner({ type: 'success', text: 'Updated.' });
+    }
+  };
+
+  const handleAdminDeleteUser = async (targetUser) => {
     if (!targetUser || targetUser.id === user?.id) return;
     const confirmed = window.confirm(
       `Permanently delete ${targetUser.full_name || targetUser.email} from CampusVerse? This removes their login account, ID card, connections, and team records.`
@@ -913,7 +930,6 @@ export default function MyProfilePage() {
 
     setAdminBanner({ type: '', text: '' });
 
-    // Clean up cutout image in storage if present
     const { data: targetProfile } = await supabase
       .from('profiles')
       .select('cutout_url')
@@ -936,21 +952,6 @@ export default function MyProfilePage() {
         type: 'success',
         text: `Removed ${targetUser.full_name || targetUser.email}.`
       });
-    }
-  };
-    const { error } = await supabase
-      .from('profiles')
-      .update(payload)
-      .eq('id', targetUserId);
-
-    if (error) {
-      setAdminBanner({ type: 'error', text: error.message });
-    } else {
-      setAllUsers((prev) =>
-        prev.map((u) => (u.id === targetUserId ? { ...u, ...payload } : u))
-      );
-      if (targetUserId === user.id) refreshProfile();
-      setAdminBanner({ type: 'success', text: 'Updated.' });
     }
   };
 
@@ -988,8 +989,8 @@ export default function MyProfilePage() {
     qrPass.scans_used < qrPass.max_scans;
 
   const qrShareUrl = isQrActive
-    ? `${window.location.origin}/id/${qrPass.token}`
-    : `${window.location.origin}/profile`;
+    ? `${PRODUCTION_APP_URL}/id/${qrPass.token}`
+    : `${PRODUCTION_APP_URL}/profile`;
 
   const qrImageSrc = `https://api.qrserver.com/v1/create-qr-code/?size=190x190&data=${encodeURIComponent(qrShareUrl)}`;
 
@@ -1397,14 +1398,12 @@ export default function MyProfilePage() {
                               </div>
                             )}
 
-                            {/* 2-Line Formatted Tagline (Preserves Enter Newlines) */}
                             {vis.bio && (
                               <p className="hero-bio-copy">
                                 {form.bio || '—'}
                               </p>
                             )}
 
-                            {/* Title-Only Clickable LinkedIn & Arena Badges with Live API Hover Telemetry */}
                             {(vis.linkedin || vis.arenas) && (
                               <div className="card-links-strip">
                                 {vis.linkedin && formattedLinkedinUrl && (
@@ -1472,7 +1471,6 @@ export default function MyProfilePage() {
                           </div>
                         </div>
 
-                        {/* Lower Deck: Skills & Interests */}
                         {(vis.skills || vis.interests) && (
                           <div className="showcase-lower-deck">
                             {vis.skills && (
@@ -1635,7 +1633,7 @@ export default function MyProfilePage() {
             </div>
           </div>
 
-          {/* FLOATING GLASS DOCK (FLIP QR PASS + CONNECT & TEAM INBOX) */}
+          {/* FLOATING GLASS DOCK */}
           <div className="floating-glass-dock">
             <div className="dock-pill-bar">
               <button
@@ -1816,7 +1814,6 @@ export default function MyProfilePage() {
           {/* 3. STACKED GLASS IDENTITY STUDIO */}
           <div className="dossier-wrapper">
             <form onSubmit={handleSaveDossier} className="dossier-card">
-              {/* Signal Integrity Meter */}
               <div className="signal-meter-header">
                 <span>SIGNAL INTEGRITY</span>
                 <b>{signalPercent}%</b>
@@ -2211,7 +2208,7 @@ export default function MyProfilePage() {
             </form>
           </div>
 
-          {/* 4. CLUB HEAD & ADMIN EVENT PUBLISHER (MULTIPLE ATTACHMENTS) */}
+          {/* 4. CLUB HEAD & ADMIN EVENT PUBLISHER */}
           {canPublishEvents && (
             <div className="dossier-wrapper">
               <div className="dossier-card">

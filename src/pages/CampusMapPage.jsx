@@ -12,9 +12,9 @@ const ACADEMIC_DATA = {
     '3. Just beside that board, take the arched pathway.\n' +
     '4. After walking through the arch, the entrance to the Academic Building will be on your left.',
   images: [
-    '/assets/building/academic-1.jpg',
-    '/assets/building/academic-2.jpg',
-    '/assets/building/academic-3.jpeg'
+    '/assets/building/academic-1.webp',
+    '/assets/building/academic-2.webp',
+    '/assets/building/academic-3.webp'
   ]
 };
 
@@ -140,9 +140,9 @@ const ROOM_DATA = {
       '2. At the end you will find room 131, facing it turn left then after few steps turn right.\n' +
       '3. After few steps, on the left you will get networking lab.',
     images: [
-      '/assets/Ground/networking-1.jpg',
-      '/assets/Ground/networking-2.png',
-      '/assets/Ground/networking-3.png'
+      '/assets/Ground/networking-1.webp',
+      '/assets/Ground/networking-2.webp',
+      '/assets/Ground/networking-3.webp'
     ]
   },
   'Computer Centre Lab (131 A)': {
@@ -152,9 +152,9 @@ const ROOM_DATA = {
       '1. Go straight, past the entrance lobby maintaining left side of corridor.\n' +
       '2. At the end you will find room 131, inside which, is computer centre lab, room 131-A.',
     images: [
-      '/assets/Ground/cc-1.png',
-      '/assets/Ground/cc-2.jpg',
-      '/assets/Ground/cc-3.jpg'
+      '/assets/Ground/cc-1.webp',
+      '/assets/Ground/cc-2.webp',
+      '/assets/Ground/cc-3.webp'
     ]
   },
   'Cyber Security Lab (132)': {
@@ -166,8 +166,8 @@ const ROOM_DATA = {
       '3. Turn right in the corridor ahead and take the first left.\n' +
       '4. Few steps ahead, on right you will find cyber security lab.',
     images: [
-      '/assets/Ground/cs-1.png',
-      '/assets/Ground/cs-2.jpg'
+      '/assets/Ground/cs-1.webp',
+      '/assets/Ground/cs-2.webp'
     ]
   },
   'Unknown (126)': {
@@ -186,7 +186,7 @@ const ROOM_DATA = {
       '2. At the end you will find room 131.\n' +
       '3. Go straight, you will find two double doors in your way, go past it.\n' +
       '4. At almost end of that corridor, on the right is your desired wc.',
-    images: ['/assets/Ground/Male-wc.jpg']
+    images: ['/assets/Ground/Male-wc.webp']
   },
   'Toilet(F)Students': {
     description: 'Hygiene and Washroom Area.',
@@ -195,7 +195,7 @@ const ROOM_DATA = {
       '2. At the end you will find room 131.\n' +
       '3. Go straight, you will find two double doors in your way, go past it.\n' +
       '4. After crossing the second double door, at immediate right, is your desired wc.',
-    images: ['/assets/Ground/Female-wc.jpg']
+    images: ['/assets/Ground/Female-wc.webp']
   },
   'Assistant Librarian (131 B)': {
     description: '',
@@ -203,7 +203,7 @@ const ROOM_DATA = {
       '1. Go straight, past the entrance lobby maintaining left side of corridor.\n' +
       '2. At the end you will find room 131.\n' +
       '3. Few steps inside 131, on your right, lies assist. librarian room.',
-    images: ['/assets/Ground/librarian-1.jpg']
+    images: ['/assets/Ground/librarian-1.webp']
   },
   'Sr. Network Engineer (131-C)': {
     description: '',
@@ -246,7 +246,7 @@ const ROOM_DATA = {
     directions:
       '1. Go straight, past the entrance lobby maintaining left side of corridor.\n' +
       '2. Coming to the very end, you will find room 122 on your left, before the next corridor.',
-    images: ['/assets/Ground/LH-122-1.jpg']
+    images: ['/assets/Ground/LH-122-1.webp']
   },
   'Faculty Room (125)': {
     description: '',
@@ -254,7 +254,7 @@ const ROOM_DATA = {
       '1. Go straight, past the entrance lobby, following straight path to the lift lobby.\n' +
       '2. Go straight through the lift lobby and you will find institute model.\n' +
       '3. Move ahead few steps in the same direction and on your front you will find room 125.',
-    images: ['/assets/Ground/facultyG-1.jpg']
+    images: ['/assets/Ground/facultyG-1.webp']
   },
   'Lecture Hall (135)': {
     description:
@@ -264,9 +264,9 @@ const ROOM_DATA = {
       '1. Go straight, past the entrance lobby maintaining right side of corridor.\n' +
       '2. Coming to the very end, you will find room 135 on your right, before the next corridor.',
     images: [
-      '/assets/Ground/LH-135-1.png',
-      '/assets/Ground/LH-135-2.png',
-      '/assets/Ground/LH-135-3.png'
+      '/assets/Ground/LH-135-1.webp',
+      '/assets/Ground/LH-135-2.webp',
+      '/assets/Ground/LH-135-3.webp'
     ]
   },
   'Tutorial Room (124)': {
@@ -276,7 +276,7 @@ const ROOM_DATA = {
       '2. Continuing your path, you will find institute model on your right.\n' +
       '3. Take the left path, on your way, parallel to the model.\n' +
       '4. Go straight and you will find two rooms out of which one is 124.',
-    images: ['/assets/Ground/Tuts-124-1.png']
+    images: ['/assets/Ground/Tuts-124-1.webp']
   },
   Reception: {
     description:
@@ -293,7 +293,7 @@ const ROOM_DATA = {
       '2. Continuing your path, you will find institute model on your right.\n' +
       '3. Take the left path, on your way, parallel to the model.\n' +
       '4. Go straight and you will find two rooms out of which one is 123.',
-    images: ['/assets/Ground/Tuts-123-1.png']
+    images: ['/assets/Ground/Tuts-123-1.webp']
   },
   '3-D Institute Model': {
     description: '3-D model of our institute.',
@@ -310,7 +310,7 @@ const ROOM_DATA = {
       '2. Continuing your path, you will find institute model on your left.\n' +
       '3. Take the right path, on your way, parallel to the model.\n' +
       '4. Go straight and you will find two rooms out of which one is 136.',
-    images: ['/assets/Ground/anechoic-136-1.jpg']
+    images: ['/assets/Ground/anechoic-136-1.webp']
   },
   'Student Activity Centre (137)': {
     description: 'Previously SAC, now used as microwave radar lab (MRL).',
@@ -319,7 +319,7 @@ const ROOM_DATA = {
       '2. Continuing your path, you will find institute model on your left.\n' +
       '3. Take the right path, on your way, parallel to the model.\n' +
       '4. Go straight and you will find two rooms out of which one is 137 (MRL).',
-    images: ['/assets/Ground/MRL-137-1.jpg']
+    images: ['/assets/Ground/MRL-137-1.webp']
   },
   'Lecture Hall (121)': {
     description: 'Generally used for club activities and events.',
@@ -327,8 +327,8 @@ const ROOM_DATA = {
       '1. Go straight, past the entrance lobby maintaining left side of corridor.\n' +
       '2. After going past the lobby and horizontal corridor, on your path you will find room 121 on left.',
     images: [
-      '/assets/Ground/LH-121-1.png',
-      '/assets/Ground/LH-121-2.jpg'
+      '/assets/Ground/LH-121-1.webp',
+      '/assets/Ground/LH-121-2.webp'
     ]
   },
   'Lecture Hall (138)': {
@@ -339,9 +339,9 @@ const ROOM_DATA = {
       '1. Go straight, past the entrance lobby maintaining right side of corridor.\n' +
       '2. After going past the lobby and horizontal corridor, on your path you will find room 138 on right.',
     images: [
-      '/assets/Ground/LH-138-1.png',
-      '/assets/Ground/LH-138-2.jpg',
-      '/assets/Ground/LH-138-3.png'
+      '/assets/Ground/LH-138-1.webp',
+      '/assets/Ground/LH-138-2.webp',
+      '/assets/Ground/LH-138-3.webp'
     ]
   },
   'Seminar-II (119)': {
@@ -387,9 +387,9 @@ const ROOM_DATA = {
       'The Entrance Lobby serves as the welcoming gateway and central hub of the institute, providing a vibrant first impression for visitors and students alike.',
     directions: 'Enter from the main gate of academic block.',
     images: [
-      '/assets/Ground/enterance looby-1.jpg',
-      '/assets/Ground/Enterance looby-hd.jpg',
-      '/assets/Ground/enterance-3.jpg'
+      '/assets/Ground/enterance looby-1.webp',
+      '/assets/Ground/Enterance looby-hd.webp',
+      '/assets/Ground/enterance-3.webp'
     ]
   },
   'Registrar (106)': {
@@ -426,8 +426,8 @@ const ROOM_DATA = {
     directions:
       '1. Walk straight through the entrance lobby and you will find the lift lobby just after crossing the lobby.',
     images: [
-      '/assets/Ground/lift g-1.jpg',
-      '/assets/Ground/lift g-2.png'
+      '/assets/Ground/lift g-1.webp',
+      '/assets/Ground/lift g-2.webp'
     ]
   },
 
@@ -442,7 +442,7 @@ const ROOM_DATA = {
       '2. Turn left at the corridor ends. After few steps you will see a double door.\n' +
       '3. Just before the double door, turn right in the corridor that follows.\n' +
       '4. At the end of corridor on left you have your desired lab.',
-    images: ['/assets/First/big-data-216-1.jpg']
+    images: ['/assets/First/big-data-216-1.webp']
   },
   'AIDL (215)': {
     description:
@@ -452,7 +452,7 @@ const ROOM_DATA = {
       '2. Turn left at the corridor ends. After few steps you will see a double door.\n' +
       '3. Just before the double door, turn right in the corridor that follows.\n' +
       '4. After few steps, you have your AIDL lab on left.',
-    images: ['/assets/First/aidl-215-1.jpg']
+    images: ['/assets/First/aidl-215-1.webp']
   },
   'Project Lab (214)': {
     description:
@@ -461,7 +461,7 @@ const ROOM_DATA = {
       '1. Go straight from staircase until the end of the corridor.\n' +
       '2. Turn left at the corridor ends. After few steps you will see a double door.\n' +
       '3. Past the double door, at immediate right, is your project lab.',
-    images: ['/assets/First/project-214-1.jpg']
+    images: ['/assets/First/project-214-1.webp']
   },
   'Library (218)': {
     description:
@@ -473,11 +473,11 @@ const ROOM_DATA = {
       '2. Go straight until corridor ends and then turn right.\n' +
       '3. At the end of corridor you will find library.',
     images: [
-      '/assets/First/library-218-1.jpg',
-      '/assets/First/library-218-2.png',
-      '/assets/First/library-218-3.jpg',
-      '/assets/First/library-218-4.png',
-      '/assets/First/library-218-5.png'
+      '/assets/First/library-218-1.webp',
+      '/assets/First/library-218-2.webp',
+      '/assets/First/library-218-3.webp',
+      '/assets/First/library-218-4.webp',
+      '/assets/First/library-218-5.webp'
     ]
   },
   'Wireless Communication Lab (220)': {
@@ -488,8 +488,8 @@ const ROOM_DATA = {
       '2. Turn right at the end of corridor and take left immediately.\n' +
       '3. Go till the end of corridor and at right you will find the lab.',
     images: [
-      '/assets/First/wireless-220-1.jpg',
-      '/assets/First/wireless-220-2.jpg'
+      '/assets/First/wireless-220-1.webp',
+      '/assets/First/wireless-220-2.webp'
     ]
   },
   'AI Experimental Lab (221)': {
@@ -499,7 +499,7 @@ const ROOM_DATA = {
       '1. Go straight from staircase until the end of the corridor.\n' +
       '2. Turn right at the end of corridor and take left immediately.\n' +
       '3. After few steps at right is your AI Experimental lab.',
-    images: ['/assets/First/aiel-221-1.jpg']
+    images: ['/assets/First/aiel-221-1.webp']
   },
   'PCB Design (219)': {
     description:
@@ -507,7 +507,7 @@ const ROOM_DATA = {
     directions:
       '1. Go straight from staircase until the end of corridor.\n' +
       '2. At the end, look slight right and you will find the lab.',
-    images: ['/assets/First/pcb-219-1.jpg']
+    images: ['/assets/First/pcb-219-1.webp']
   },
   'Speech Processing Lab (228)': {
     description:
@@ -516,7 +516,7 @@ const ROOM_DATA = {
       '1. Go straight from staircase until the end of the corridor.\n' +
       '2. Turn right and go past the double door.\n' +
       '3. After crossing at immediate left is your desired lab.',
-    images: ['/assets/First/speech-228-1.png']
+    images: ['/assets/First/speech-228-1.webp']
   },
   'Lecture Hall (209)': {
     description:
@@ -525,14 +525,14 @@ const ROOM_DATA = {
     directions:
       '1. Turn left from stairs, go till end of corridor.\n' +
       '2. Turn right at the end and after some steps, your desired lecture hall on left.',
-    images: ['/assets/First/LH-209-1.jpg']
+    images: ['/assets/First/LH-209-1.webp']
   },
   'Faculty Room (227)': {
     description: '',
     directions:
       '1. Go straight after stairs and after some distance, on your right you will see entry for room 222.\n' +
       '2. After reaching parallel to the door, move left and after few steps, on right you will find the desired room.',
-    images: []
+    images: ['/assets/First/faculty-227-1.webp']
   },
   'Lecture Hall (222)': {
     description:
@@ -549,7 +549,7 @@ const ROOM_DATA = {
       '1. Turn left from stairs, go till end of corridor.\n' +
       '2. At the end of corridor turn right and after some distance turn left to the inner corridor.\n' +
       '3. Go straight and you will find two rooms out of which one is 208.',
-    images: ['/assets/First/Tuts-208-1.jpg']
+    images: ['/assets/First/Tuts-208-1.webp']
   },
   'Tutorial (207)': {
     description: '',
@@ -557,7 +557,7 @@ const ROOM_DATA = {
       '1. Turn left from stairs, go till end of corridor.\n' +
       '2. At the end of corridor turn right and after some distance turn left to the inner corridor.\n' +
       '3. Go straight and you will find two rooms out of which one is 207.',
-    images: ['/assets/First/Tuts-207-1.jpg']
+    images: ['/assets/First/Tuts-207-1.webp']
   },
   'Central Atrium': {
     description: '',
@@ -570,7 +570,7 @@ const ROOM_DATA = {
       '1. Go straight from stairs.\n' +
       '2. Halfway through the main corridor, turn right to the inner corridor.\n' +
       '3. Go straight and you will find two rooms out of which one is 223.',
-    images: ['/assets/First/Tuts-223-1.jpg']
+    images: ['/assets/First/Tuts-223-1.webp']
   },
   'Tutorial (224)': {
     description: '',
@@ -578,7 +578,7 @@ const ROOM_DATA = {
       '1. Go straight from stairs.\n' +
       '2. Halfway through the main corridor, turn right to the inner corridor.\n' +
       '3. Go straight and you will find two rooms out of which one is 224.',
-    images: ['/assets/First/Tuts-224-1.jpg']
+    images: ['/assets/First/Tuts-224-1.webp']
   },
   'Lecture Hall (206)': {
     description:
@@ -587,15 +587,15 @@ const ROOM_DATA = {
     directions:
       '1. Turn left from the stairs, go till the end of corridor.\n' +
       '2. At the end of corridor turn right. After few steps room 206 is on your left.',
-    images: ['/assets/First/LH-206-1.jpg']
+    images: ['/assets/First/LH-206-1.webp']
   },
   'Lecture Hall (225)': {
     description: 'Lecture Hall for CSE 3rd year, for the session 2026-27.',
     directions: 'Few steps straight after stairs, on right.',
     images: [
-      '/assets/First/LH-225-1.jpg',
-      '/assets/First/LH-C-1.jpg',
-      '/assets/First/LH-C-2.jpg'
+      '/assets/First/LH-225-1.webp',
+      '/assets/First/LH-C-1.webp',
+      '/assets/First/LH-C-2.webp'
     ]
   },
   'Faculty Cabin Entrance (205)': {
@@ -603,7 +603,7 @@ const ROOM_DATA = {
     directions:
       '1. Turn left from stairs and walk straight.\n' +
       '2. At the end of corridor you will find the cabin.',
-    images: ['/assets/First/faculty cabin-205-1.png']
+    images: ['/assets/First/faculty cabin-205-1.webp']
   },
   'Confidential (203)': {
     description:
@@ -656,25 +656,19 @@ const ROOM_DATA = {
   'LIFT LOBBY (226)': {
     description: 'An area for accessing lift facility.',
     directions: 'From the stairs, turn left and after some steps turn right\nYou will find lift lobby.',
-    images: [
-      '/assets/First/lift f-1.jpg',
-      '/assets/First/lift f-2.jpg'
-    ]
+    images: ['/assets/First/lift f-1.webp']
   },
   'Office all inclusive': {
     description: '',
     directions: 'Immediate right after stairs.',
-    images: ['/assets/First/oai-1.jpg']
+    images: ['/assets/First/oai-1.webp']
   },
   'Meeting Room-1 (204)': {
     description: '',
     directions:
       '1. Turn left from the stairs and walk straight.\n' +
       '2. Before the end of passage, meeting room is on your left.',
-    images: [
-      '/assets/First/meeting room-204-1.png',
-      '/assets/First/meeting room-204-2.png'
-    ]
+    images: ['/assets/First/meeting-204-1.webp']
   },
 
   // ==========================================
@@ -688,7 +682,7 @@ const ROOM_DATA = {
       '2. Turn left from the end, and go straight until the double door.\n' +
       '3. Before the double door, turn right.\n' +
       '4. After few steps, the lab is on the left.',
-    images: ['/assets/Second/isbn-lab-314-1.jpg']
+    images: ['/assets/second/isbn-lab-314-1.webp']
   },
   'AICTE IDEA Lab (316)': {
     description:
@@ -698,11 +692,11 @@ const ROOM_DATA = {
       '1. Walk straight along the passage and keep moving ahead. Turn left at the end and continue forward.\n' +
       '2. You will reach the AICTE IDEA Lab, on your right.',
     images: [
-      '/assets/Second/aicte-316-1.png',
-      '/assets/Second/aicte-316-2.png',
-      '/assets/Second/aicte-316-3.png',
-      '/assets/Second/aicte-316-4.png',
-      '/assets/Second/aicte-316-5.png'
+      '/assets/second/aicte-316-1.webp',
+      '/assets/second/aicte-316-2.webp',
+      '/assets/second/aicte-316-3.webp',
+      '/assets/second/aicte-316-4.webp',
+      '/assets/second/aicte-316-5.webp'
     ]
   },
   'Robotics Lab (317)': {
@@ -712,7 +706,7 @@ const ROOM_DATA = {
       '1. Enter the second floor and walk straight towards the main corridor until the end.\n' +
       '2. Turn right and then turn left on the inner corridor.\n' +
       '3. Walk straight until you find robotics lab on your right.',
-    images: []
+    images: ['/assets/second/robotics-317-1.webp']
   },
   'Boys Common Room (313)': {
     description: '',
@@ -720,7 +714,7 @@ const ROOM_DATA = {
       '1. Walk straight along the corridor and at the end of it, take left.\n' +
       '2. Continue along the corridor and go past the first double door.\n' +
       '3. After crossing the double door, at immediate right is your desired room.',
-    images: ['/assets/Second/boys c-313-1.jpg']
+    images: ['/assets/second/boys c-313-1.webp']
   },
   'Unknown (318)': {
     description: '',
@@ -737,35 +731,35 @@ const ROOM_DATA = {
     directions:
       '1. Turn left and move until the end of corridor and take right.\n' +
       '2. Walk straight until the end of corridor, and just before the end, on left is classroom 308.',
-    images: ['/assets/Second/classroom-308-1.jpg']
+    images: ['/assets/second/classroom-308-1.webp']
   },
   'Faculty (325)': {
     description: '',
     directions:
       '1. Go straight from stairs and after some distance, on your right you will see entry for room 320.\n' +
       '2. After reaching parallel to the door, move left and after few steps, on right you will find the desired room.',
-    images: ['/assets/Second/faculty-325-1.jpg']
+    images: ['/assets/second/faculty-325-1.webp']
   },
   'Class Room (319)': {
     description: '',
     directions:
       '1. Walk straight from the stairs and move until the end of corridor.\n' +
       '2. Before the end of corridor, you will find room 319 on your right.',
-    images: ['/assets/Second/classroom-319-1.png']
+    images: ['/assets/second/classroom-319-1.webp']
   },
   'Class Room (307)': {
     description: 'ECE Classroom for 4th year students for the year 2026-27.',
     directions:
       '1. Turn left from the stairs until the end of passage, then turn right.\n' +
       '2. Walk straight, and after reaching parallel to end of the atrium, on your left, is room 307.',
-    images: ['/assets/Second/classroom-307-1.jpg']
+    images: ['/assets/second/classroom-307-1.webp']
   },
   'Class Room (320)': {
     description: '',
     directions:
       '1. Go straight from the stairs.\n' +
       '2. Walk straight, and after reaching parallel to end of the atrium, on your right, is room 320.',
-    images: ['/assets/Second/classroom-320-1.jpg']
+    images: ['/assets/second/classroom-320-1.webp']
   },
   'Tutorial (306)': {
     description: '',
@@ -773,7 +767,7 @@ const ROOM_DATA = {
       '1. Turn left from stairs, go till end of corridor.\n' +
       '2. At the end of corridor turn right and after some distance turn left to the inner corridor.\n' +
       '3. Go straight and you will find two rooms out of which one is 306.',
-    images: ['/assets/Second/Tuts-306-1.jpg']
+    images: ['/assets/second/Tuts-306-1.webp']
   },
   'Tutorial (305)': {
     description: '',
@@ -781,7 +775,7 @@ const ROOM_DATA = {
       '1. Turn left from stairs, go till end of corridor.\n' +
       '2. At the end of corridor turn right and after some distance turn left to the inner corridor.\n' +
       '3. Go straight and you will find two rooms out of which one is 305.',
-    images: ['/assets/Second/Tuts-305-1.jpg']
+    images: ['/assets/second/Tuts-305-1.webp']
   },
   'R&D Space (321)': {
     description:
@@ -790,7 +784,7 @@ const ROOM_DATA = {
       '1. Go straight from stairs.\n' +
       '2. Halfway through the main corridor, turn right to the inner corridor.\n' +
       '3. Go straight and you will find two rooms out of which one is 321.',
-    images: []
+    images: ['/assets/second/rd-space-321-1.webp']
   },
   'Unknown (322)': {
     description: '',
@@ -798,19 +792,19 @@ const ROOM_DATA = {
       '1. Go straight from stairs.\n' +
       '2. Halfway through the main corridor, turn right to the inner corridor.\n' +
       '3. Go straight and you will find two rooms out of which one is 322.',
-    images: ['/assets/Second/unknown-322-1.jpg']
+    images: ['/assets/second/unknown-322-1.webp']
   },
   'Lecture Hall (304)': {
     description: 'Lecture hall for 3rd year DSAI students for the session 2026-27.',
     directions:
       '1. Take a left turn and walk straight along the corridor.\n' +
       '2. At the end turn right, after few steps room 304 is on your left.',
-    images: ['/assets/Second/LH-304-1.png']
+    images: []
   },
   'Lecture Hall (323)': {
     description: '',
     directions: '1. Go straight from stairs and after few steps on your right is room 323.',
-    images: ['/assets/Second/LH-323-1.jpg']
+    images: ['/assets/second/LH-323-1.webp']
   },
   'VLSI and Embedded Lab (303)': {
     description:
@@ -818,13 +812,13 @@ const ROOM_DATA = {
     directions:
       '1. Turn left from stairs and go straight.\n' +
       '2. At the end you will find VLSI lab.',
-    images: ['/assets/Second/vlsi-303-1.jpg']
+    images: ['/assets/second/vlsi-303-1.webp']
   },
   'Electronic Circuit Lab (302)': {
     description:
       'Electronic Circuit Lab is associated with the institute core course Digital System Design, Electronic Circuits, Analog Integrated Circuits and IT Workshop (Hardware Module). This lab runs in both the semester and accommodates approximately 120 students per semester. The laboratory has basic electronic experiments on analog, digital and mixed signal circuits.',
     directions: 'At immediate left from the stairs.',
-    images: ['/assets/Second/electronic-circuit-302-1.jpg']
+    images: ['/assets/second/electronic-circuit-302-1.webp']
   },
   'ToileT(M)Students': {
     description: 'Hygiene and Washroom Area',
@@ -848,40 +842,21 @@ const ROOM_DATA = {
     description:
       'The interactive experiments in this lab will give the students an opportunity for learning and better understanding of the basic concepts and constructs of computer programming as well as advanced methodology concepts like Deep learning, Big data Technologies, Artificial Intelligence, Computational Intelligence etc.',
     directions: 'At immediate right from the stairs.',
-    images: ['/assets/Second/computer programming-301-1.jpg']
+    images: ['/assets/second/computer programming-301-1.webp']
   }
 };
 
-function buildAssetCandidates(src) {
-  if (!src) return [];
-  const candidates = new Set();
-
-  const folderVariants = [
-    src,
-    src.replace(
-      /\/assets\/(ground|first|second)\//i,
-      (_, f) => `/assets/${f.charAt(0).toUpperCase() + f.slice(1).toLowerCase()}/`
-    ),
-    src.replace(/\/assets\/(ground|first|second)\//i, (_, f) => `/assets/${f.toLowerCase()}/`)
-  ];
-
-  // Prioritize fast compressed .webp first, then fall back to original extensions
-  folderVariants.forEach((variant) => {
-    const base = variant.replace(/\.(png|jpe?g|webp)$/i, '');
-    candidates.add(`${base}.webp`);
-  });
-
-  folderVariants.forEach((variant) => {
-    candidates.add(variant);
-    const base = variant.replace(/\.(png|jpe?g|webp)$/i, '');
-    ['.jpg', '.png', '.jpeg'].forEach((ext) => candidates.add(`${base}${ext}`));
-  });
-
-  return Array.from(candidates);
-}
-
 function SmartMapImage({ src, alt, className, onClick, fallbackNotice = true }) {
-  const candidates = buildAssetCandidates(src);
+  const candidates = src
+    ? Array.from(
+        new Set([
+          src,
+          src.replace(/\.webp$/i, '.png'),
+          src.replace(/\.webp$/i, '.jpg'),
+          src.replace(/\.webp$/i, '.jpeg')
+        ])
+      )
+    : [];
   const [attemptIdx, setAttemptIdx] = useState(0);
 
   useEffect(() => {
@@ -1021,10 +996,9 @@ export default function CampusMapPage() {
 
     const activeIdx = roomModalOpen ? roomSlideIdx : academicSlideIdx;
     const nextSrc = imgs[(activeIdx + 1) % imgs.length];
-    const nextCandidates = buildAssetCandidates(nextSrc);
-    if (nextCandidates[0]) {
+    if (nextSrc) {
       const preload = new Image();
-      preload.src = nextCandidates[0];
+      preload.src = nextSrc;
     }
   }, [roomModalOpen, academicModalOpen, currentRoom, roomSlideIdx, academicSlideIdx]);
 
@@ -1148,7 +1122,7 @@ export default function CampusMapPage() {
         <section className="campus-art">
           <div className={`campus-art-stage ${isZoomed ? 'is-zoomed' : ''}`}>
             <SmartMapImage
-              src="/assets/Campus-isometric.jpg"
+              src="/assets/Campus-isometric.webp"
               alt="Isometric campus map"
               fallbackNotice={false}
             />
