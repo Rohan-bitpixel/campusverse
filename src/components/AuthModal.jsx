@@ -1,19 +1,26 @@
-﻿import React, { useState } from 'react';
+﻿import React, { useEffect, useState } from 'react';
 import { createPortal } from 'react-dom';
 import { Eye, EyeOff, Fingerprint, X } from 'lucide-react';
 import { useAuth } from '../context/AuthContext';
 import './AuthModal.css';
 
-export default function AuthModal({ isOpen, onClose, onSuccess }) {
+export default function AuthModal({ isOpen, onClose, onSuccess, initialMode = 'signin' }) {
   const { signIn, signUp, resetPassword } = useAuth();
 
-  const [authMode, setAuthMode] = useState('signin'); // 'signin' | 'signup' | 'forgot'
+  const [authMode, setAuthMode] = useState(initialMode); // 'signin' | 'signup' | 'forgot'
   const [fullName, setFullName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
   const [msg, setMsg] = useState({ type: '', text: '' });
   const [submitting, setSubmitting] = useState(false);
+
+  useEffect(() => {
+    if (isOpen) {
+      setAuthMode(initialMode);
+      setMsg({ type: '', text: '' });
+    }
+  }, [isOpen, initialMode]);
 
   if (!isOpen) return null;
 

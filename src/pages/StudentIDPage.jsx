@@ -149,7 +149,7 @@ async function fetchPeerLiveStats(person) {
 }
 
 export default function StudentIDPage() {
-  const { user } = useAuth();
+  const { user, loading: authLoading } = useAuth();
   const { token: urlToken } = useParams();
   const handledUrlTokenRef = useRef(null);
   const [students, setStudents] = useState([]);
@@ -162,6 +162,7 @@ export default function StudentIDPage() {
   const [incomingReqs, setIncomingReqs] = useState([]);
   const [requestsDrawerOpen, setRequestsDrawerOpen] = useState(false);
   const [authModalOpen, setAuthModalOpen] = useState(false);
+  const [authModalMode, setAuthModalMode] = useState('signin');
 
   // Deck Navigation & Directional Animation State
   const [activeIndex, setActiveIndex] = useState(0);
@@ -317,6 +318,14 @@ export default function StudentIDPage() {
   const verifyQrToken = async (rawToken) => {
     const clean = rawToken.trim();
     if (!clean) return;
+
+    if (!user) {
+      setTokenInput(clean);
+      setAuthModalMode('signup');
+      setAuthModalOpen(true);
+      return;
+    }
+
     setScanStatus('VERIFYING...');
 
     const { data: pass } = await supabase
@@ -352,10 +361,21 @@ export default function StudentIDPage() {
   };
 
   useEffect(() => {
-    if (!urlToken || students.length === 0 || handledUrlTokenRef.current === urlToken) return;
+    if (!urlToken || authLoading) return;
+
+    // Require registration/login before unlocking a scanned QR pass
+    if (!user) {
+      setTokenInput(urlToken);
+      setAuthModalMode('signup');
+      setAuthModalOpen(true);
+      return;
+    }
+
+    if (students.length === 0 || handledUrlTokenRef.current === urlToken) return;
     handledUrlTokenRef.current = urlToken;
+    setAuthModalOpen(false);
     verifyQrToken(urlToken);
-  }, [urlToken, students]);
+  }, [urlToken, authLoading, user, students]);
 
   useEffect(() => {
     if (!scannerOpen) return;
@@ -395,6 +415,7 @@ export default function StudentIDPage() {
 
   const handleConnect = async (targetId) => {
     if (!user) {
+      setAuthModalMode('signup');
       setAuthModalOpen(true);
       return;
     }
@@ -551,7 +572,7 @@ export default function StudentIDPage() {
         <span>STUDENT ID DECK</span>
 
         <div style={{ marginLeft: 'auto', display: 'flex', gap: '10px', flexWrap: 'wrap' }}>
-          {user && (
+          {user ? (
             <button
               type="button"
               onClick={() => setRequestsDrawerOpen((p) => !p)}
@@ -561,6 +582,17 @@ export default function StudentIDPage() {
               {pendingIncomingCount > 0 && (
                 <span className="inbox-count-pill">{pendingIncomingCount}</span>
               )}
+            </button>
+          ) : (
+            <button
+              type="button"
+              onClick={() => {
+                setAuthModalMode('signup');
+                setAuthModalOpen(true);
+              }}
+              className="outline-btn"
+            >
+              <UserPlus size={15} /> REGISTER / SIGN IN
             </button>
           )}
           <button type="button" onClick={() => setScannerOpen((p) => !p)} className="outline-btn">
@@ -720,7 +752,23 @@ export default function StudentIDPage() {
           </span>
         </div>
 
-        {loading ? (
+        {urlToken && !authLoading && !user ? (
+          <div style={{ textAlign: 'center', padding: '4rem 1.5rem' }}>
+            <p style={{ color: '#cbd5e1', marginBottom: '1rem', fontSize: '0.95rem' }}>
+              Register or sign in with your @iiitnr.edu.in account to view this shared Student ID pass.
+            </p>
+            <button
+              type="button"
+              onClick={() => {
+                setAuthModalMode('signup');
+                setAuthModalOpen(true);
+              }}
+              className="connect-primary-btn"
+            >
+              <UserPlus size={15} /> REGISTER TO VIEW ID PASS
+            </button>
+          </div>
+        ) : loading ? (
           <p style={{ textAlign: 'center', color: 'var(--text-muted)' }}>LOADING...</p>
         ) : !current ? (
           <p style={{ textAlign: 'center', color: 'var(--text-muted)' }}>NO MATCHING ID CARDS</p>
@@ -1072,10 +1120,15 @@ export default function StudentIDPage() {
 
       <AuthModal
         isOpen={authModalOpen}
+        initialMode={authModalMode}
         onClose={() => setAuthModalOpen(false)}
         onSuccess={() => {
           setAuthModalOpen(false);
           loadDirectoryAndConnections();
+          if (urlToken) {
+            handledUrlTokenRef.current = urlToken;
+            verifyQrToken(urlToken);
+          }
         }}
       />
     </div>
