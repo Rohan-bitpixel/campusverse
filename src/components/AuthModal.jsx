@@ -46,7 +46,8 @@ export default function AuthModal({ isOpen, onClose, onSuccess, initialMode = 's
         if (error) {
           setMsg({ type: 'error', text: error.message });
         } else {
-          setMsg({ type: 'success', text: 'Confirm your @iiitnr.edu.in email link, then sign in.' });
+          setMsg({ type: 'success', text: 'ID created. Pending admin verification.' });
+          onSuccess?.();
         }
       } else {
         const { error } = await signIn({ email, password });
